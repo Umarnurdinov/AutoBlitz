@@ -9,13 +9,9 @@ function Home() {
   return (
     <>
       <Header />
-<<<<<<< HEAD
       <Hero />
       <Slider />
       <Sale />
-=======
-      <Sale/>
->>>>>>> 0ed12c7 (block cars and add a detail)
     </>
   );
 }
