@@ -1,3 +1,4 @@
+import { Sale } from "../components/detail/detail";
 import Header from "../components/header/header";
 import React from "react";
 import Hero from "../components/hero/hero";
@@ -8,9 +9,13 @@ function Home() {
   return (
     <>
       <Header />
+<<<<<<< HEAD
       <Hero />
       <Slider />
       <Sale />
+=======
+      <Sale/>
+>>>>>>> 0ed12c7 (block cars and add a detail)
     </>
   );
 }
