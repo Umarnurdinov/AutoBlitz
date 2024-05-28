@@ -27,10 +27,10 @@
     flex-direction: column;
     gap: 10px;
     font-size: 17px;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 
     &_li {
-      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
       padding: 0;
       color: #003366;
     }
