@@ -1,3 +1,4 @@
+import { Sale } from "../components/detail/detail";
 import Header from "../components/header/header";
 import React from "react";
 import Hero from "../components/hero/hero";

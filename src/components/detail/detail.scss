@@ -1,0 +1,47 @@
+.btns {
+    display: flex;
+    gap: 25px;
+
+    //   flex-wrap: wrap;
+}
+
+.btn {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.btn_search {
+    background-color: #2c4e8a;
+    color: #fff;
+    border-radius: 8px;
+    display: flex;
+    gap: 5px;
+}
+
+.btn_sell {
+    background-color: #fff;
+    color: #2c4e8a;
+    border: 1px solid #2c4e8a;
+    border-radius: 8px;
+    display: flex;
+    gap: 10px;
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+@media (max-width: 425px) {
+  .btn_sell .btn_search{
+    gap: 5px;
+  }
+}
