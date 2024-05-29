@@ -45,7 +45,10 @@ const Slider = () => {
           />
         ))}
         <div className="controls">
-          <div className="arrow left" onClick={() => showDivs(slideIndex - 1)}>
+          <div
+            className="new-arrow left"
+            onClick={() => showDivs(slideIndex - 1)}
+          >
             &#10094;
           </div>
           <div className="dots">
@@ -57,7 +60,10 @@ const Slider = () => {
               ></span>
             ))}
           </div>
-          <div className="arrow right" onClick={() => showDivs(slideIndex + 1)}>
+          <div
+            className="new-arrow right"
+            onClick={() => showDivs(slideIndex + 1)}
+          >
             &#10095;
           </div>
         </div>
