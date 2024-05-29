@@ -39,7 +39,7 @@
       font-size: 12px;
     }
 
-    border: 1px solid transparent !important; /* Ensure there is a border to change on hover */
+    border: 1px solid transparent !important;
 
     &:hover {
       border-color: #007870 !important;
@@ -108,7 +108,7 @@
 }
 
 .back-button {
-  border-color: transparent; /* Ensure there is a border to change on hover */
+  border-color: transparent;
 
   &:hover {
     color: #007870 !important;
@@ -121,8 +121,8 @@
 
   &:hover {
     color: #007870 !important;
-    border-color: #007870 !important; /* Added to ensure the border color changes on hover */
-    background-color: #e6f7f7 !important; /* Optional: Add a light background color for better visibility */
+    border-color: #007870 !important;
+    background-color: #e6f7f7 !important;
   }
 }
 
@@ -138,11 +138,11 @@
 }
 
 .ant-select-focused .ant-select-selector {
-  border-color: #007870 !important; /* Ensure border color changes when dropdown is focused */
+  border-color: #007870 !important;
 }
 
 .ant-select-item-option:hover {
-  border-color: #007870 !important; /* Ensure border color changes when dropdown items are hovered */
+  border-color: #007870 !important;
 }
 
 .ant-select-dropdown {

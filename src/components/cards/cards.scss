@@ -6,7 +6,7 @@
 
 .cards-container {
   display: flex;
-  overflow-x: auto; // Enable horizontal scrolling by default
+  overflow-x: auto;
   scroll-behavior: smooth;
   gap: 16px;
   padding-bottom: 20px;
@@ -107,21 +107,21 @@
 
 @media (max-width: 900px) {
   .cards-container {
-    overflow-x: auto; // Enable horizontal scrolling for small screens
+    overflow-x: auto;
   }
 
   .arrow {
-    display: none; // Hide arrows for screens <= 900px
+    display: none;
   }
 }
 
 @media (min-width: 901px) {
   .cards-container {
-    overflow-x: hidden; // Disable horizontal scrolling for wide screens
+    overflow-x: hidden;
   }
 
   .arrow {
-    display: block; // Show arrows for screens > 900px
+    display: block;
   }
 }
 
