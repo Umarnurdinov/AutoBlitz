@@ -28,7 +28,6 @@ function Cars() {
 
     return (
         <>
-            <Header />
             <div className="container">
                 <div className="cars-container">
                     <Link to={"/"}>
