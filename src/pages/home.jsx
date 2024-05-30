@@ -3,8 +3,8 @@ import React from "react";
 import Hero from "../components/hero/hero";
 import Slider from "../components/slider/slider";
 import Sale from "../components/sale/sale";
-import Cars from "../components/cars/cars";
-
+import Cards from "../components/cards/cards";
+import Footer from "../components/footer/footer";
 function Home() {
   return (
     <>
@@ -13,6 +13,8 @@ function Home() {
       <Sale/>
       <Slider />
       <Sale />
+      <Cards />
+      <Footer />
     </>
   );
 }

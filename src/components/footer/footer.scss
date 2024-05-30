@@ -1,0 +1,136 @@
+.footer {
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 20px 0;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    flex-wrap: wrap;
+
+    .footer-logo img {
+      max-height: 50px;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+
+      a {
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s;
+
+        &:hover {
+          color: #0056b3;
+        }
+      }
+    }
+  }
+  .footer-middle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+
+    .footer-contact {
+      p {
+        margin: 0 0 10px;
+      }
+    }
+    .footer-social {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+
+      a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+        transition: transform 0.3s;
+
+        img {
+          max-height: 30px;
+          transition: transform 0.3s;
+
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
+
+        p {
+          font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+            "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+          margin: 0;
+          color: #000;
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+
+    p {
+      margin: 5px 0;
+
+      a {
+        color: #007bff;
+        text-decoration: none;
+
+        &:hover {
+          color: #0056b3;
+        }
+      }
+    }
+  }
+  @media (max-width: 860px) {
+    .footer-top {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+
+      .footer-nav {
+        justify-content: center;
+      }
+    }
+
+    .footer-social a {
+      justify-content: center;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .footer-middle {
+      flex-direction: column;
+    }
+    .footer-contact {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 320px) {
+    .footer-nav a {
+      font-size: 14px;
+    }
+
+    .footer-contact,
+    .footer-social p,
+    .footer-bottom p {
+      font-size: 12px;
+    }
+
+    .footer-social img {
+      max-height: 25px;
+    }
+  }
+}
