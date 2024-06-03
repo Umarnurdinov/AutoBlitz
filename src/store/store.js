@@ -1,9 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import like from "../store/slices/like";
+import detail from "./slices/detail";
+import data from "./slices/data";
+import like from "./slices/like";
 
 
- export const store =configureStore({
-    reducer:{
-     like
-    }
-})
+export const store = configureStore({
+  reducer: {
+    detail,
+    data,
+    like,
+  },
+});
