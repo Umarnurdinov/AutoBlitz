@@ -1,7 +1,18 @@
+// App.js
+import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/home";
+import DetailPage from "./components/detailPage/detailPage";
+import Cars from "./components/cars/cars";
+import Form from "./components/form/form";
 
-const routes = createBrowserRouter([{ path: "/", element: <Home /> }]);
+const routes = createBrowserRouter([
+  { path: "/", element: <Home /> },
+  { path: "/detail/:id", element: <DetailPage /> },
+  { path: "/cars", element: <Cars /> },
+  { path: "/form", element: <Form /> },
+]);
+
 function App() {
   return (
     <>

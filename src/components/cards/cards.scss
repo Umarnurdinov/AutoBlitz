@@ -104,6 +104,13 @@
   border-radius: 5px;
   border: 1px solid white;
 }
+ant-btn
+  css-dev-only-do-not-override-17seli4
+  ant-btn-default
+  ant-btn-dangerous
+  btn {
+  width: 100px;
+}
 
 @media (max-width: 900px) {
   .cards-container {

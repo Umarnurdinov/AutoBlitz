@@ -40,17 +40,18 @@
     }
   }
 }
-.plus {
-  width: 20px;
-  height: 20px;
-}
-.like {
-  width: 20px;
-  height: 20px;
-}
+.plus,
+.like,
 .signin {
   width: 20px;
   height: 20px;
+}
+.pluss,
+.likes,
+.signins {
+  display: flex;
+  gap: 10px;
+  color: black;
 }
 @media screen and (max-width: 800px) {
   .header_nav_add_text,

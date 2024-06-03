@@ -15,7 +15,10 @@ import bmw3 from "../../assets/bmwx53.webp";
 import mercedes from "../../assets/mercedes.jpeg";
 import mercedes2 from "../../assets/mercedes2.jpeg";
 import mercedes3 from "../../assets/mercedes3.jpeg";
+import { useDispatch } from "react-redux";
 import "./cards.scss";
+import { Button } from "antd";
+import { addData } from "../../store/slices/data";
 
 function Cards() {
   const cardData = [
@@ -28,6 +31,7 @@ function Cards() {
       year: "2018",
       transmission: "АТ",
       drive: "Передний привод",
+      id: 1,
     },
     {
       images: [camry, camry2, camry3],
@@ -38,6 +42,7 @@ function Cards() {
       year: "2017",
       transmission: "АТ",
       drive: "Полный привод",
+      id: 2,
     },
     {
       images: [honda, honda2, honda3],
@@ -48,6 +53,7 @@ function Cards() {
       year: "2019",
       transmission: "АКП",
       drive: "Полный привод",
+      id: 3,
     },
     {
       images: [bmw, bmw2, bmw3],
@@ -58,6 +64,7 @@ function Cards() {
       year: "2020",
       transmission: "АКПП",
       drive: "Полный привод",
+      id: 4,
     },
     {
       images: [mercedes, mercedes2, mercedes3],
@@ -68,9 +75,11 @@ function Cards() {
       year: "2019",
       transmission: "АКПП",
       drive: "Задний привод",
+      id: 5,
     },
   ];
 
+  const dispatch = useDispatch();
   const containerRef = useRef(null);
   const [showArrows, setShowArrows] = useState(window.innerWidth > 900);
 
@@ -80,6 +89,10 @@ function Cards() {
 
   const scrollRight = () => {
     containerRef.current.scrollBy({ left: 320, behavior: "smooth" });
+  };
+
+  const handleAddData = () => {
+    dispatch(addData(cardData));
   };
 
   useEffect(() => {
@@ -103,7 +116,7 @@ function Cards() {
         )}
         <div className="cards-container" ref={containerRef}>
           {cardData.map((card, index) => (
-            <Card key={index} {...card} />
+            <Card key={index} data={card} />
           ))}
         </div>
         {showArrows && (
@@ -111,6 +124,9 @@ function Cards() {
             {">"}
           </button>
         )}
+        <Button danger onClick={handleAddData}>
+          Эз
+        </Button>
       </div>
     </div>
   );
