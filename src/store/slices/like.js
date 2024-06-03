@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 //текущее состояние
 const initialState={
-    todo:[],
+    favorite:[],
+    countFav:0,
 }
 
 const LikeSlice=createSlice({
@@ -9,14 +10,15 @@ const LikeSlice=createSlice({
     initialState,
     reducers:{
         //тут будут методы
-        addTodo(state,action){
-            state.todo=[...state.todo,action.payload]
+        addFavorite(state,action){
+            state.favorite=[...state.favorite,action.payload]
         },
     }
 })
 //сюда методдорду экспорт кылам
-export const {addTodo}=LikeSlice.actions
-export default LikeSlice.reducer()
+export const {addFavorite}=LikeSlice.actions
+export default LikeSlice.reducer
+
 
 
 

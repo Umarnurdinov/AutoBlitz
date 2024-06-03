@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import like from "./slices/like";
+import like from "../store/slices/like";
 
-export const store = configureStore({
+
+ export const store =configureStore({
     reducer:{
-        LikeSlice
+     like
     }
 })

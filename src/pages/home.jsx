@@ -10,7 +10,6 @@ function Home() {
     <>
       <Header />
       <Hero />
-      <Sale/>
       <Slider />
       <Sale />
       <Cards />
