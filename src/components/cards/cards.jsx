@@ -75,7 +75,7 @@ function Cards() {
       year: "2019",
       transmission: "АКПП",
       drive: "Задний привод",
-      id: 5,
+      id:5,
     },
   ];
 
