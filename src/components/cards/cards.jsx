@@ -15,12 +15,15 @@ import bmw3 from "../../assets/bmwx53.webp";
 import mercedes from "../../assets/mercedes.jpeg";
 import mercedes2 from "../../assets/mercedes2.jpeg";
 import mercedes3 from "../../assets/mercedes3.jpeg";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./cards.scss";
 import { Button } from "antd";
 import { addData } from "../../store/slices/data";
+import axios from "axios";
 
 function Cards() {
+  const dispatch=useDispatch()
+  const select=useSelector((state)=>state.data.data)
   const cardData = [
     {
       images: [mazda, mazda2, mazda3],
@@ -79,13 +82,20 @@ function Cards() {
     },
   ];
 
-  const dispatch = useDispatch();
+  
   const containerRef = useRef(null);
   const [showArrows, setShowArrows] = useState(window.innerWidth > 900);
+  
+  useEffect(()=>{
+    
+    axios.get("http://13.49.183.39:8000/cars/").then((res)=>{
+        dispatch(addData(res.data))
+    });
 
+  },[])
   const scrollLeft = () => {
     containerRef.current.scrollBy({ left: -320, behavior: "smooth" });
-  };
+    };
 
   const scrollRight = () => {
     containerRef.current.scrollBy({ left: 320, behavior: "smooth" });
@@ -104,6 +114,8 @@ function Cards() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+    console.log(select);
+
 
   return (
     <div className="cards">

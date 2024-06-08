@@ -5,7 +5,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { FaN } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
-import { detailData } from "../../store/slices/detail";
+// import { detailData } from "../../store/slices/detail";
 
 function Card({ data }) {
   const nav = useNavigate();
