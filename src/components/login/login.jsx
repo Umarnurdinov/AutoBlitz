@@ -1,61 +1,54 @@
-// // src/components/Login.js
-// import React, { useState } from "react";
-// import {
-//   auth,
-//   provider,
-//   signInWithPopup,
-//   signInWithEmailAndPassword,
-// } from "../firebase";
-// import "./login.scss";
+import axios from "axios";
+import React, { useState } from "react";
 
-// function Login() {
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
+function Login() {
+    const [user, setUser] = useState({
+        phone: "",
+        password: "",
+    });
 
-//   const handleLogin = (e) => {
-//     e.preventDefault();
-//     signInWithEmailAndPassword(auth, email, password)
-//       .then((userCredential) => {
-//         console.log(userCredential);
-//       })
-//       .catch((error) => {
-//         console.error(error);
-//       });
-//   };
+    const submitHandler = async (event) => {
+        event.preventDefault(); // Prevent the default form submission behavior
+        try {
+            const response = await axios.post(
+                "http://13.49.183.39:8000/register/",
+                user
+            );
+            console.log(response.data);
+        } catch (error) {
+            console.error("There was an error registering the user!", error);
+        }
+    };
 
-//   const handleGoogleLogin = () => {
-//     signInWithPopup(auth, provider)
-//       .then((result) => {
-//         console.log(result);
-//       })
-//       .catch((error) => {
-//         console.error(error);
-//       });
-//   };
+    function getUser() {
+        axios.get("http://13.49.183.39:8000/users/").then((user)=>console.log(user));
+    }
 
-//   return (
-//     <div className="login">
-//       <div className="container">
-//         <form onSubmit={handleLogin}>
-//           <h2>Login</h2>
-//           <input
-//             type="email"
-//             placeholder="Email"
-//             value={email}
-//             onChange={(e) => setEmail(e.target.value)}
-//           />
-//           <input
-//             type="password"
-//             placeholder="Password"
-//             value={password}
-//             onChange={(e) => setPassword(e.target.value)}
-//           />
-//           <button type="submit">Login</button>
-//         </form>
-//         <button onClick={handleGoogleLogin}>Login with Google</button>
-//       </div>
-//     </div>
-//   );
-// }
+    return (
+        <div>
+            <h1>Login Page</h1>
+            <form onSubmit={submitHandler}>
+                <input
+                    placeholder="Write your phone"
+                    value={user.phone}
+                    onChange={(e) =>
+                        setUser({ ...user, phone: e.target.value })
+                    }
+                    type="text"
+                />
+                <input
+                    placeholder="Write your password"
+                    value={user.password}
+                    onChange={(e) =>
+                        setUser({ ...user, password: e.target.value })
+                    }
+                    type="password" // Use 'password' type for security
+                />
+                <button type="submit">Зарегистрироваться</button>
+            </form>
+                <button onClick={getUser} >GetUser</button>
+        </div>
+    );
+}
 
-// export default Login;
+export default Login;
