@@ -20,7 +20,50 @@ a {
 }
 .container {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1240px;
   margin-inline: auto;
   padding-inline: 20px;
+}
+/* .cards-container-for-favorite {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+} */
+/* FavoritePage.css */
+
+/* Общие стили для cards-container-for-favorite */
+.cards-container-for-favorite {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+/* Адаптация для больших экранов */
+@media (min-width: 1200px) {
+  .cards-container-for-favorite {
+    gap: 20px;
+  }
+}
+
+/* Адаптация для планшетов */
+@media (max-width: 1199px) {
+  .cards-container-for-favorite {
+    gap: 15px;
+  }
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+  .cards-container-for-favorite {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+/* Дополнительные стили для мелких экранов */
+@media (max-width: 480px) {
+  .cards-container-for-favorite {
+    gap: 5px;
+  }
 }

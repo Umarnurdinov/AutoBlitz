@@ -1,5 +1,6 @@
 .header {
   padding: 20px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   &_content {
     display: flex;
     align-items: center;
@@ -40,17 +41,23 @@
     }
   }
 }
-.plus {
-  width: 20px;
-  height: 20px;
-}
-.like {
-  width: 20px;
-  height: 20px;
-}
+.plus,
+.like,
 .signin {
   width: 20px;
   height: 20px;
+}
+.pluss,
+.likes,
+.signins {
+  display: flex;
+  gap: 10px;
+  color: black;
+}
+.pluss:hover,
+.likes:hover,
+.signins:hover {
+  color: #027b9a;
 }
 @media screen and (max-width: 800px) {
   .header_nav_add_text,
@@ -68,7 +75,7 @@
     height: 30px;
   }
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 360px) {
   .header_logo_img {
     width: 100px;
     height: 22px;

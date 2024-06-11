@@ -52,12 +52,16 @@
 
   &_callBtn {
     color: #fff;
-    background: #007870;
+    background: #027b9a;
     width: 260px;
     height: 50px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+  }
+  &_callBtn {
+    color: #00bef0;
+    background: #fffff2;
   }
 
   &_form {
@@ -77,7 +81,26 @@
       color: #fff;
     }
   }
+  .hero_callBtn {
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #027b9a;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+  }
 
+  .hero_callBtn:hover {
+    background-color: #fffff2;
+    color: #00bef0;
+  }
   .form {
     display: flex;
     align-items: center;
@@ -94,27 +117,81 @@
     height: 50px;
     border-radius: 5px;
     border: none;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   }
 
   .send {
-    background: #007870;
+    background: #027b9a;
     color: #fff;
     width: 300px;
     height: 50px;
     border: none;
     border-radius: 5px;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     cursor: pointer;
+  }
+  .send:hover {
+    background: #fffff2;
+    color: #00bef0;
+  }
+  .info-adress {
+    color: #fff;
+    font-size: 16px;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    margin-bottom: 20px;
+  }
+  .location {
+    cursor: pointer;
+  }
+  .confirm-address,
+  .address-error {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .confirm-address {
+    background-color: #4caf50;
+    color: white;
+  }
+
+  .confirm-address:hover {
+    background-color: #45a049;
+  }
+
+  .address-error {
+    background-color: #f44336;
+    color: white;
+    margin-left: 10px;
+  }
+
+  .address-error:hover {
+    background-color: #e53935;
   }
 
   @media (max-width: 1024px) {
+    &_textContent {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
     &_content {
       flex-direction: column;
       gap: 50px;
     }
-
+    height: auto !important;
     &_form {
       width: 70%;
+    }
+    .hero_title,
+    .hero_pretitle {
+      text-align: center;
     }
   }
 
@@ -126,11 +203,6 @@
     &_pretitle {
       font-size: 14px;
       max-width: 100%;
-    }
-
-    &_callBtn {
-      width: 220px;
-      height: 40px;
     }
 
     &_form {
@@ -145,6 +217,14 @@
     }
     .send {
       width: 100%;
+    }
+    .confirm-address {
+      font-size: 12px;
+      padding: 8px 15px;
+    }
+    .address-error {
+      font-size: 12px;
+      padding: 8px 15px;
     }
   }
 
@@ -163,7 +243,7 @@
     }
 
     &_callBtn {
-      font-size: 10px;
+      font-size: 10px !important;
       width: 200px;
       height: 35px;
     }
@@ -190,9 +270,22 @@
     .hero_textContent {
       text-align: center;
     }
+    .confirm-address,
+    .address-error {
+      font-size: 11.3px;
+      padding: 8px;
+    }
   }
 
   @media (max-width: 400px) {
+    .hero_form {
+      padding: 0;
+    }
+    .name,
+    .number,
+    .location {
+      padding-left: 10px;
+    }
     &_title {
       margin-top: 50px;
       font-size: 18px;
@@ -226,5 +319,50 @@
       font-size: 15px;
       margin: 20px 0;
     }
+    .confirm-address,
+    .address-error {
+      font-size: 9px;
+      padding: 6.5px;
+    }
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+  max-width: 400px;
+  width: 80%;
+
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  p {
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    font-size: 1.1rem;
+    line-height: 30px;
   }
 }

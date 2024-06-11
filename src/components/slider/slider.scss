@@ -1,10 +1,6 @@
 .slider {
   position: relative;
-  margin: 100px 0;
-  //   .contain {
-  //     max-width: 1440px;
-  //     margin: 0 auto;
-  //   }
+  margin: 40px 0;
   &_textContent {
     left: 18%;
     bottom: 34%;
@@ -27,12 +23,12 @@
     flex-direction: column;
     gap: 10px;
     font-size: 17px;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 
     &_li {
-      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
       padding: 0;
-      color: #003366;
+      color: #027b9a;
     }
   }
   &_more {
@@ -41,9 +37,9 @@
     font-size: 16px;
     width: 150px;
     height: 50px;
-    background: #003e7d;
+    background: #027b9a;
     border: none;
-    border-radius: 50px;
+    border-radius: 5px;
     color: #fff;
   }
 
@@ -53,6 +49,7 @@
     overflow: hidden;
 
     img {
+      object-fit: cover;
       width: 100%;
       display: none;
       opacity: 0;
@@ -62,6 +59,7 @@
     .visible {
       display: block;
       opacity: 1;
+      border-radius: 25px;
     }
     .controls {
       width: 100%;
@@ -71,10 +69,10 @@
       color: white;
       font-size: 24px;
 
-      .arrow {
+      .new-arrow {
         cursor: pointer;
         padding: 16px;
-        background-color: rgba(0, 0, 0, 0.5);
+        background: #027b9a;
         border-radius: 10px;
         user-select: none;
         border: 2px solid white;
@@ -109,7 +107,7 @@
           transition: background-color 0.3s ease;
 
           &.active {
-            background-color: white;
+            background-color: #027b9a;
           }
         }
       }
@@ -139,12 +137,16 @@
     width: 120px;
     height: 40px;
   }
+  .slider_more:hover {
+    color: #027b9a;
+    background: #fffff2;
+  }
 }
 @media screen and (max-width: 850px) {
   .slider_textContent img {
     display: none;
   }
-  .arrow {
+  .new-arrow {
     padding: 10px !important;
     &.left {
       top: -25px !important;
@@ -182,7 +184,7 @@
     width: 60px;
     height: 20px;
   }
-  .arrow {
+  .new-arrow {
     padding: 6px !important;
     &.left {
       top: -20px !important;
@@ -215,7 +217,7 @@
     width: 40px;
     height: 15px;
   }
-  .arrow {
+  .new-arrow {
     border: 1px solid white !important;
     padding: 4px !important;
     &.left {
