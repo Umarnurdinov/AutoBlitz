@@ -52,12 +52,16 @@
 
   &_callBtn {
     color: #fff;
-    background: #007870;
+    background: #027b9a;
     width: 260px;
     height: 50px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+  }
+  &_callBtn {
+    color: #00bef0;
+    background: #fffff2;
   }
 
   &_form {
@@ -83,7 +87,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #007870;
+    background-color: #027b9a;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -94,7 +98,8 @@
   }
 
   .hero_callBtn:hover {
-    background-color: #007870;
+    background-color: #fffff2;
+    color: #00bef0;
   }
   .form {
     display: flex;
@@ -117,7 +122,7 @@
   }
 
   .send {
-    background: #007870;
+    background: #027b9a;
     color: #fff;
     width: 300px;
     height: 50px;
@@ -125,6 +130,10 @@
     border-radius: 5px;
     margin-bottom: 40px;
     cursor: pointer;
+  }
+  .send:hover {
+    background: #fffff2;
+    color: #00bef0;
   }
   .info-adress {
     color: #fff;
@@ -135,6 +144,35 @@
   }
   .location {
     cursor: pointer;
+  }
+  .confirm-address,
+  .address-error {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .confirm-address {
+    background-color: #4caf50;
+    color: white;
+  }
+
+  .confirm-address:hover {
+    background-color: #45a049;
+  }
+
+  .address-error {
+    background-color: #f44336;
+    color: white;
+    margin-left: 10px;
+  }
+
+  .address-error:hover {
+    background-color: #e53935;
   }
 
   @media (max-width: 1024px) {
@@ -180,6 +218,14 @@
     .send {
       width: 100%;
     }
+    .confirm-address {
+      font-size: 12px;
+      padding: 8px 15px;
+    }
+    .address-error {
+      font-size: 12px;
+      padding: 8px 15px;
+    }
   }
 
   @media (max-width: 480px) {
@@ -224,9 +270,22 @@
     .hero_textContent {
       text-align: center;
     }
+    .confirm-address,
+    .address-error {
+      font-size: 11.3px;
+      padding: 8px;
+    }
   }
 
   @media (max-width: 400px) {
+    .hero_form {
+      padding: 0;
+    }
+    .name,
+    .number,
+    .location {
+      padding-left: 10px;
+    }
     &_title {
       margin-top: 50px;
       font-size: 18px;
@@ -259,6 +318,11 @@
     .hero_form_text {
       font-size: 15px;
       margin: 20px 0;
+    }
+    .confirm-address,
+    .address-error {
+      font-size: 9px;
+      padding: 6.5px;
     }
   }
 }

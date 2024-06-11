@@ -6,6 +6,9 @@ import Sale from "../components/sale/sale";
 import Cards from "../components/cards/cards";
 import Footer from "../components/footer/footer";
 import Add from "../components/add/add";
+import Banner from "../components/banner/banner";
+import Reklams from "../components/reklams/reklams";
+import Questions from "../components/questions/questions";
 
 function Home() {
   return (
@@ -13,9 +16,14 @@ function Home() {
       <Header />
       <Hero />
       <Add />
+      <Banner />
       <Slider />
-      <Sale />
       <Cards />
+      {/* <Cards />
+      <Cards />
+      <Cards /> */}
+      <Questions />
+      <Reklams />
       <Footer />
     </>
   );

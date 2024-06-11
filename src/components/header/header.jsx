@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo.png";
 import { FiPlusCircle } from "react-icons/fi";
 import { FaRegHeart } from "react-icons/fa";
@@ -13,6 +13,16 @@ function Header() {
 
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "auto";
+    }
+    return () => {
+      document.body.style.overflowY = "auto";
+    };
+  }, [showModal]);
 
  
 
@@ -21,10 +31,12 @@ function Header() {
       <div className="header">
         <div className="container">
           <div className="header_content">
-            <div className="header_logo">
-              <img src={logo} alt="#" className="header_logo_img" />
-              <div className="header_logo_textContent"></div>
-            </div>
+            <Link to={"/"}>
+              <div className="header_logo">
+                <img src={logo} alt="#" className="header_logo_img" />
+                <div className="header_logo_textContent"></div>
+              </div>
+            </Link>
             <div className="header_nav">
               <div className="header_nav_add">
                 <Link className="pluss" to="#" onClick={handleOpenModal}>
@@ -33,7 +45,7 @@ function Header() {
                 </Link>
               </div>
               <div className="header_nav_like">
-                <Link className="likes">
+                <Link to={"/favorite"} className="likes">
                   <FaRegHeart className="like" />
                   <p className="header_nav_like_text">Избранное</p>
                 </Link>
