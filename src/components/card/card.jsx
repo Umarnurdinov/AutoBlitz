@@ -5,9 +5,9 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { detailData } from "../../store/slices/detail";
+import { addFavorite, removeFavorite } from "../../store/slices/like";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { addFavorite, removeFavorite } from "../../store/slices/like";
 
 function Card({ data }) {
   useEffect(() => {

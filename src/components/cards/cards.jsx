@@ -22,13 +22,16 @@ import toyota from "../../assets/toyotaHigh.jpeg";
 import toyota2 from "../../assets/toyotaHigh2.avif";
 import toyota3 from "../../assets/toyotaHigh3.jpeg";
 import { useDispatch, useSelector } from "react-redux";
+
 import "./cards.scss";
+
 import { addData } from "../../store/slices/data";
+
 import axios from "axios";
 
 function Cards() {
   const [loading, setLoading] = useState(true);
-  const [showArrows, setShowArrows] = useState(window.innerWidth > 900);
+
   const imgArray = [
     [bmw3, bmw2, bmw],
     [mercedes3, mercedes2, mercedes],
@@ -38,6 +41,7 @@ function Cards() {
     [bmwm2, bmwm, bmwm3],
     [toyota2, toyota, toyota3],
   ];
+
   const dispatch = useDispatch();
   useEffect(() => {
     axios
@@ -58,6 +62,8 @@ function Cards() {
 
   const cars = useSelector((state) => state.data.data);
   const containerRef = useRef(null);
+
+  const [showArrows, setShowArrows] = useState(window.innerWidth > 900);
 
   const scrollLeft = () => {
     containerRef.current.scrollBy({ left: -310, behavior: "smooth" });
