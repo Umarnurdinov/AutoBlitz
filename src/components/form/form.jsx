@@ -1,27 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./form.scss";
+import axios from "axios";
 
 function Form() {
-  const [formData, setFormData] = useState({
-    brand: "",
-    model: "",
-    bodyType: "",
-    color: "",
-    engine: "",
-    power: "",
-    price: "",
-    year: "",
-    mileage: "",
-    transmission: "",
-    drivetrain: "",
-    owners: "",
-    steering: "",
-    photo: null,
-  });
-
   const [errors, setErrors] = useState({});
   const [images, setImages] = useState([]);
+  useEffect(() => {
+    axios.get("http://13.49.229.91:8000/car-data/").then((res) => {
+      carSet({
+        marka: res.data.marka,
+        body: res.data.body,
+        color: res.data.body_color,
+        checkpoint: res.data.checkpoint,
+        driveUnit: res.data.drive_unit,
+        steer: res.data.steering_wheel,
+        introduceYear: res.data.year_of_manufacture,
+      });
+    });
+  }, []);
+
+  const [formData, setFormData] = useState({
+    marka: 0,
+    car_model: "",
+    price: 0,
+    year_of_manufacture: 0,
+    mileage: 0,
+    body: 0,
+    body_color: 0,
+    engine: "",
+    power: "",
+    name: "",
+    phone_number: "",
+    checkpoint: 0,
+    drive_unit: 0,
+    owners: 0,
+    steering_wheel: "",
+    images: [],
+  });
+  const [car, carSet] = useState({
+    marka: [],
+    body: [],
+    color: [],
+    checkpoint: [],
+    driveUnit: [],
+    steer: [],
+    introduceYear: [],
+  });
 
   const handleFileChange = (event) => {
     const files = Array.from(event.target.files);
@@ -31,6 +56,9 @@ function Form() {
 
   const validateForm = () => {
     const newErrors = {};
+    if (!formData.name) newErrors.name = "Это поле обязательно";
+    if (!formData.number) newErrors.number = "Это поле обязательно";
+    if (!formData.gender) newErrors.gender = "Это поле обязательно";
     if (!formData.brand) newErrors.brand = "Это поле обязательно";
     if (!formData.model) newErrors.model = "Это поле обязательно";
     if (!formData.bodyType) newErrors.bodyType = "Это поле обязательно";
@@ -57,27 +85,46 @@ function Form() {
       [name]: "",
     });
   };
+  function sendHandler() {
+    axios
+      .post("http://13.49.183.39:8000/cars/", formData)
+      .then((res) => console.log(res));
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
       const formDataToSubmit = new FormData();
       Object.keys(formData).forEach((key) => {
-        formDataToSubmit.append(key, formData[key]);
+        if (key === "images") {
+          formData[key].forEach((imageObject) => {
+            formDataToSubmit.append("images", JSON.stringify(imageObject));
+          });
+        } else {
+          formDataToSubmit.append(key, formData[key]);
+        }
       });
 
-      fetch("YOUR_BACKEND_ENDPOINT", {
-        method: "POST",
-        body: formDataToSubmit,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Success:", data);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+      axios
+        .post("http://13.49.183.39:8000/cars/", formDataToSubmit)
+        .then((res) => console.log(res));
     }
+  };
+
+  const handleImageUpload = (event) => {
+    const fileList = event.target.files;
+    const newImages = [];
+    for (let i = 0; i < fileList.length; i++) {
+      const imageUrl = URL.createObjectURL(fileList[i]);
+      newImages.push({
+        car: formData.marka,
+        image: imageUrl,
+      });
+    }
+    setImages((prevImages) => [...prevImages, ...newImages]);
+    const formDataCopy = { ...formData };
+    formDataCopy.images = [...formData.images, ...newImages];
+    setFormData(formDataCopy);
   };
 
   return (
@@ -88,18 +135,60 @@ function Form() {
       <h2>Введите данные об авто</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
+          <label htmlFor="name">Имя</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Введите имя"
+            value={formData.name}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                name: e.target.value,
+              })
+            }
+          />
+          {errors.name && <span className="error">{errors.name}</span>}
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="number">Номер</label>
+          <input
+            type="text"
+            id="number"
+            name="number"
+            placeholder="Введите номер"
+            value={formData.phone_number}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                phone_number: e.target.value,
+              })
+            }
+          />
+          {errors.number && <span className="error">{errors.number}</span>}
+        </div>
+
+        <div className="form-group">
           <label htmlFor="brand">Марка авто</label>
           <select
             id="brand"
             name="brand"
-            value={formData.brand}
-            onChange={handleChange}
+            value={formData.marka}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                marka: Number(e.target.value),
+              })
+            }
           >
             <option value="">Выберите марку</option>
-            <option value="toyota">Toyota</option>
-            <option value="ford">Ford</option>
-            <option value="bmw">BMW</option>
-            <option value="audi">Audi</option>
+            {car.marka.map((el) => (
+              <option key={el.id} value={el.id}>
+                {el.marka}
+              </option>
+            ))}
           </select>
           {errors.brand && <span className="error">{errors.brand}</span>}
         </div>
@@ -111,8 +200,13 @@ function Form() {
             id="model"
             name="model"
             placeholder="Введите модель"
-            value={formData.model}
-            onChange={handleChange}
+            value={formData.car_model}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                car_model: e.target.value,
+              })
+            }
           />
           {errors.model && <span className="error">{errors.model}</span>}
         </div>
@@ -122,15 +216,20 @@ function Form() {
           <select
             id="bodyType"
             name="bodyType"
-            value={formData.bodyType}
-            onChange={handleChange}
+            value={formData.body}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                body: Number(e.target.value),
+              })
+            }
           >
             <option value="">Выберите кузов</option>
-            <option value="sedan">Седан</option>
-            <option value="suv">Внедорожник</option>
-            <option value="coupe">Купе</option>
-            <option value="hatchback">Хэтчбек</option>
-            <option value="convertible">Кабриолет</option>
+            {car.body.map((el) => (
+              <option key={el.id} value={el.id}>
+                {el.body}
+              </option>
+            ))}
           </select>
           {errors.bodyType && <span className="error">{errors.bodyType}</span>}
         </div>
@@ -140,15 +239,20 @@ function Form() {
           <select
             id="color"
             name="color"
-            value={formData.color}
-            onChange={handleChange}
+            value={formData.body_color}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                body_color: Number(e.target.value),
+              })
+            }
           >
             <option value="">Выберите цвет</option>
-            <option value="black">Черный</option>
-            <option value="white">Белый</option>
-            <option value="silver">Серебристый</option>
-            <option value="blue">Синий</option>
-            <option value="red">Красный</option>
+            {car.color.map((el) => (
+              <option key={el.id} value={el.id}>
+                {el.body_color}
+              </option>
+            ))}
           </select>
           {errors.color && <span className="error">{errors.color}</span>}
         </div>
@@ -161,7 +265,12 @@ function Form() {
             name="engine"
             placeholder="Введите двигатель"
             value={formData.engine}
-            onChange={handleChange}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                engine: e.target.value,
+              })
+            }
           />
           {errors.engine && <span className="error">{errors.engine}</span>}
         </div>
@@ -174,7 +283,12 @@ function Form() {
             name="power"
             placeholder="Введите мощность"
             value={formData.power}
-            onChange={handleChange}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                power: e.target.value,
+              })
+            }
           />
           {errors.power && <span className="error">{errors.power}</span>}
         </div>
@@ -187,7 +301,12 @@ function Form() {
             name="price"
             placeholder="Введите цену"
             value={formData.price}
-            onChange={handleChange}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                price: Number(e.target.value),
+              })
+            }
           />
           {errors.price && <span className="error">{errors.price}</span>}
         </div>
@@ -197,13 +316,18 @@ function Form() {
           <select
             id="year"
             name="year"
-            value={formData.year}
-            onChange={handleChange}
+            value={formData.year_of_manufacture}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                year_of_manufacture: Number(e.target.value),
+              })
+            }
           >
             <option value="">Выберите год</option>
-            {[...Array(35).keys()].map((i) => (
-              <option key={2024 - i} value={2024 - i}>
-                {2024 - i}
+            {car.introduceYear.map((el) => (
+              <option key={el.id} value={el.id}>
+                {el.year_of_manufacture}
               </option>
             ))}
           </select>
@@ -218,7 +342,12 @@ function Form() {
             name="mileage"
             placeholder="Введите пробег"
             value={formData.mileage}
-            onChange={handleChange}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                mileage: Number(e.target.value),
+              })
+            }
           />
           {errors.mileage && <span className="error">{errors.mileage}</span>}
         </div>
@@ -228,14 +357,20 @@ function Form() {
           <select
             id="transmission"
             name="transmission"
-            value={formData.transmission}
-            onChange={handleChange}
+            value={formData.checkpoint}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                checkpoint: Number(e.target.value),
+              })
+            }
           >
             <option value="">Выберите коробку передач</option>
-            <option value="automatic">Автоматическая</option>
-            <option value="manual">Механическая</option>
-            <option value="cvt">Вариатор</option>
-            <option value="dual-clutch">Робот</option>
+            {car.checkpoint.map((el) => (
+              <option key={el.id} value={el.id}>
+                {el.checkpoint}
+              </option>
+            ))}
           </select>
           {errors.transmission && (
             <span className="error">{errors.transmission}</span>
@@ -247,13 +382,20 @@ function Form() {
           <select
             id="drivetrain"
             name="drivetrain"
-            value={formData.drivetrain}
-            onChange={handleChange}
+            value={formData.drive_unit}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                drive_unit: Number(e.target.value),
+              })
+            }
           >
             <option value="">Выберите привод</option>
-            <option value="awd">Полный</option>
-            <option value="fwd">Передний</option>
-            <option value="rwd">Задний</option>
+            {car.driveUnit.map((el) => (
+              <option key={el.id} value={el.id}>
+                {el.drive_unit}
+              </option>
+            ))}
           </select>
           {errors.drivetrain && (
             <span className="error">{errors.drivetrain}</span>
@@ -268,7 +410,12 @@ function Form() {
             name="owners"
             placeholder="Введите количество владельцев"
             value={formData.owners}
-            onChange={handleChange}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                owners: Number(e.target.value),
+              })
+            }
           />
           {errors.owners && <span className="error">{errors.owners}</span>}
         </div>
@@ -278,12 +425,20 @@ function Form() {
           <select
             id="steering"
             name="steering"
-            value={formData.steering}
-            onChange={handleChange}
+            value={formData.steering_wheel}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                steering_wheel: Number(e.target.value),
+              })
+            }
           >
             <option value="">Выберите положение руля</option>
-            <option value="left">Левый</option>
-            <option value="right">Правый</option>
+            {car.steer.map((el) => (
+              <option key={el.id} value={el.id}>
+                {el.steering_wheel}
+              </option>
+            ))}
           </select>
           {errors.steering && <span className="error">{errors.steering}</span>}
         </div>
@@ -299,7 +454,7 @@ function Form() {
         </div>
 
         <div className="btn_toEnd">
-          <button type="submit" className="btn-submit">
+          <button onClick={sendHandler} type="submit" className="btn-submit">
             Отправить
           </button>
         </div>

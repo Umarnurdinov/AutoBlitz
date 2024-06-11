@@ -8,21 +8,22 @@
   .btn-back {
     background: none;
     border: none;
-    color: #007870;
+    color: #027b9a;
     font-size: 16px;
     cursor: pointer;
     margin-bottom: 20px;
     text-align: left;
 
     &:hover {
-      color: #006860;
+      background: #fffff2;
+      color: #00bef0;
     }
   }
 
   h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: #007870;
+    color: #027b9a;
   }
 
   .form-group {
@@ -49,7 +50,7 @@
 
   input:focus,
   select:focus {
-    border-color: #007870;
+    border-color: #027b9a;
   }
 
   .error {
@@ -60,7 +61,7 @@
 
   .btn-submit {
     padding: 15px;
-    background-color: #007870;
+    background-color: #027b9a;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -70,7 +71,8 @@
     margin-top: 20px;
 
     &:hover {
-      background-color: #006860;
+      background-color: #fffff2;
+      color: #00bef0;
     }
   }
 

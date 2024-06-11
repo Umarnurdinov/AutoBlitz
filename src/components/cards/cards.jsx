@@ -1,98 +1,70 @@
 import React, { useRef, useEffect, useState } from "react";
 import Card from "../card/card";
-import mazda from "../../assets/mazda.webp";
-import mazda2 from "../../assets/mazda2.jpeg";
-import mazda3 from "../../assets/mazda3.webp";
-import camry from "../../assets/camry.webp";
-import camry2 from "../../assets/camry2.webp";
-import camry3 from "../../assets/camry3.webp";
-import honda from "../../assets/honda.jpeg";
-import honda2 from "../../assets/honda2.jpeg";
-import honda3 from "../../assets/honda3.webp";
 import bmw from "../../assets/bmwx5.webp";
 import bmw2 from "../../assets/bmwx52.jpeg";
 import bmw3 from "../../assets/bmwx53.webp";
 import mercedes from "../../assets/mercedes.jpeg";
 import mercedes2 from "../../assets/mercedes2.jpeg";
 import mercedes3 from "../../assets/mercedes3.jpeg";
-import { useDispatch } from "react-redux";
+import lexusrx from "../../assets/lexusrx.jpeg";
+import lexusrx2 from "../../assets/lexusrx2.jpeg";
+import lexusrx3 from "../../assets/lexusrx3.jpeg";
+import tesla from "../../assets/tesla3.webp";
+import tesla2 from "../../assets/tesla3-2.avif";
+import tesla3 from "../../assets/tesla3-3.jpeg";
+import jetour from "../../assets/jetour.jpeg";
+import jetour2 from "../../assets/jetour2.jpeg";
+import jetour3 from "../../assets/jetour3.jpeg";
+import bmwm from "../../assets/bmwm.png";
+import bmwm2 from "../../assets/bmwm-2.avif";
+import bmwm3 from "../../assets/bmwm-3.jpeg";
+import toyota from "../../assets/toyotaHigh.jpeg";
+import toyota2 from "../../assets/toyotaHigh2.avif";
+import toyota3 from "../../assets/toyotaHigh3.jpeg";
+import { useDispatch, useSelector } from "react-redux";
 import "./cards.scss";
-import { Button } from "antd";
 import { addData } from "../../store/slices/data";
+import axios from "axios";
 
 function Cards() {
-  const cardData = [
-    {
-      images: [mazda, mazda2, mazda3],
-      title: "Mazda 6 3 (GJ) Рестайлинг",
-      price: "2 178 000",
-      installment: "37 219",
-      mileage: "78 395",
-      year: "2018",
-      transmission: "АТ",
-      drive: "Передний привод",
-      id: 1,
-    },
-    {
-      images: [camry, camry2, camry3],
-      title: "Toyota Camry 7 Рестайлинг",
-      price: "2 400 000",
-      installment: "41 071",
-      mileage: "82 000",
-      year: "2017",
-      transmission: "АТ",
-      drive: "Полный привод",
-      id: 2,
-    },
-    {
-      images: [honda, honda2, honda3],
-      title: "Honda CR-V 5 Рестайлинг",
-      price: "2 950 000",
-      installment: "50 482",
-      mileage: "55 000",
-      year: "2019",
-      transmission: "АКП",
-      drive: "Полный привод",
-      id: 3,
-    },
-    {
-      images: [bmw, bmw2, bmw3],
-      title: "BMW X5",
-      price: "5 200 000",
-      installment: "89 247",
-      mileage: "30 000",
-      year: "2020",
-      transmission: "АКПП",
-      drive: "Полный привод",
-      id: 4,
-    },
-    {
-      images: [mercedes, mercedes2, mercedes3],
-      title: "Mercedes-Benz E-Class",
-      price: "3 700 000",
-      installment: "63 424",
-      mileage: "40 000",
-      year: "2019",
-      transmission: "АКПП",
-      drive: "Задний привод",
-      id: 5,
-    },
-  ];
-
-  const dispatch = useDispatch();
-  const containerRef = useRef(null);
+  const [loading, setLoading] = useState(true);
   const [showArrows, setShowArrows] = useState(window.innerWidth > 900);
+  const imgArray = [
+    [bmw3, bmw2, bmw],
+    [mercedes3, mercedes2, mercedes],
+    [lexusrx3, lexusrx2, lexusrx],
+    [tesla, tesla2, tesla3],
+    [jetour, jetour2, jetour3],
+    [bmwm2, bmwm, bmwm3],
+    [toyota2, toyota, toyota3],
+  ];
+  const dispatch = useDispatch();
+  useEffect(() => {
+    axios
+      .get("http://13.49.229.91:8000/cars/")
+      .then((res) => {
+        res.data.forEach((el, index) => {
+          el.images = imgArray[index % imgArray.length]; // Add images to each car
+          dispatch(addData(el));
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [dispatch]);
+
+  const cars = useSelector((state) => state.data.data);
+  const containerRef = useRef(null);
 
   const scrollLeft = () => {
-    containerRef.current.scrollBy({ left: -320, behavior: "smooth" });
+    containerRef.current.scrollBy({ left: -310, behavior: "smooth" });
   };
 
   const scrollRight = () => {
-    containerRef.current.scrollBy({ left: 320, behavior: "smooth" });
-  };
-
-  const handleAddData = () => {
-    dispatch(addData(cardData));
+    containerRef.current.scrollBy({ left: 310, behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -105,6 +77,16 @@ function Cards() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  if (loading) {
+    return (
+      <div className="loaderToFullScreen">
+        <div className="loaderHelp">
+          <div className="loader"></div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="cards">
       <div className="container">
@@ -115,7 +97,7 @@ function Cards() {
           </button>
         )}
         <div className="cards-container" ref={containerRef}>
-          {cardData.map((card, index) => (
+          {cars.map((card, index) => (
             <Card key={index} data={card} />
           ))}
         </div>
@@ -124,9 +106,6 @@ function Cards() {
             {">"}
           </button>
         )}
-        <Button danger onClick={handleAddData}>
-          Эз
-        </Button>
       </div>
     </div>
   );

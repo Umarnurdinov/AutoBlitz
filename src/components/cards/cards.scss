@@ -33,6 +33,7 @@
 }
 
 .recomendText {
+  font-size: 32px;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
@@ -93,13 +94,13 @@
 }
 
 .arrow-left {
-  background: #007870;
+  background: #027b9a;
   left: 4%;
   border-radius: 5px;
 }
 
 .arrow-right {
-  background: #007870;
+  background: #027b9a;
   right: 4%;
   border-radius: 5px;
   border: 1px solid white;
@@ -111,8 +112,44 @@ ant-btn
   btn {
   width: 100px;
 }
-
-@media (max-width: 900px) {
+.loaderToFullScreen {
+  width: 100vw;
+  height: 100vh;
+}
+.loaderHelp {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+  border: 4px solid #0000;
+  border-radius: 50%;
+  border-right-color: #25b09b;
+  animation: l15 1s infinite linear;
+}
+.loader::before,
+.loader::after {
+  content: "";
+  grid-area: 1/1;
+  margin: 2px;
+  border: inherit;
+  border-radius: 50%;
+  animation: l15 2s infinite;
+}
+.loader::after {
+  margin: 8px;
+  animation-duration: 3s;
+}
+@keyframes l15 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+@media screen and (min-width: 901px) {
   .cards-container {
     overflow-x: auto;
   }
@@ -120,19 +157,20 @@ ant-btn
   .arrow {
     display: none;
   }
-}
-
-@media (min-width: 901px) {
-  .cards-container {
-    overflow-x: hidden;
-  }
 
   .arrow {
     display: block;
   }
 }
-
-@media (max-width: 768px) {
+@media screen and (max-width: 900px) {
+  .recomendText {
+    font-size: 26px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .cards {
+    padding: 0;
+  }
   .card {
     min-width: 240px;
   }
@@ -158,7 +196,10 @@ ant-btn
   }
 }
 
-@media (max-width: 480px) {
+@media screen and (max-width: 480px) {
+  .recomendText {
+    font-size: 18px;
+  }
   .card {
     min-width: 200px;
   }
@@ -183,35 +224,5 @@ ant-btn
 
   .arrow {
     padding: 6px;
-  }
-}
-
-@media (max-width: 320px) {
-  .card {
-    min-width: 160px;
-  }
-
-  .card-title {
-    font-size: 12px;
-  }
-
-  .card-price {
-    font-size: 14px;
-  }
-
-  .card-installment {
-    font-size: 10px;
-  }
-
-  .card-details {
-    font-size: 8px;
-  }
-
-  .arrow {
-    padding: 4px;
-  }
-
-  .cards-container {
-    gap: 8px;
   }
 }

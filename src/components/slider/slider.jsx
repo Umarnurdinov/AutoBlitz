@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./slider.scss";
 import logo from "../../assets/logo-2.png";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const Slider = () => {
+  useEffect(() => {
+    Aos.init({
+      duration: 650,
+      once: true,
+    });
+  }, []);
   const [slideIndex, setSlideIndex] = useState(1);
   const slides = [
-    "https://s3-alpha-sig.figma.com/img/2292/ce61/ca41be38791095be7d9260a72618df98?Expires=1717977600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=p0HkQDrRBhBBa2ZHVB33GTk17gMtI70YW3mkpMAXUK7QdsLh7ZxVafrdUlKVHkYfTWHnT-RKHvwg8XOui93sX76Uia3X-GoreZcj~~uIUCGxs1zvDwXOShYbXZk3VpNRB8wEyiCMfKXMb91XazcJ8J7cN608Rxz-5Xeq7UAUyWwBWa~dLRYe6dMvZbkD6nicZ0ShAMOlKcFmF~2bhaRhz9wGxdqP~Z6G2IdjPL~ZsAFLmK6PiD8p5b77CZw1xNZdnwiRDLtg4Arf-QoF-jwj2AC2m~Tma58qp1f7RsYNO5qnwQU~IGVpkL1mSuhajjhz5Viklp620SLqLidSIY-7cQ__",
-    "https://s3-alpha-sig.figma.com/img/2292/ce61/ca41be38791095be7d9260a72618df98?Expires=1717977600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=p0HkQDrRBhBBa2ZHVB33GTk17gMtI70YW3mkpMAXUK7QdsLh7ZxVafrdUlKVHkYfTWHnT-RKHvwg8XOui93sX76Uia3X-GoreZcj~~uIUCGxs1zvDwXOShYbXZk3VpNRB8wEyiCMfKXMb91XazcJ8J7cN608Rxz-5Xeq7UAUyWwBWa~dLRYe6dMvZbkD6nicZ0ShAMOlKcFmF~2bhaRhz9wGxdqP~Z6G2IdjPL~ZsAFLmK6PiD8p5b77CZw1xNZdnwiRDLtg4Arf-QoF-jwj2AC2m~Tma58qp1f7RsYNO5qnwQU~IGVpkL1mSuhajjhz5Viklp620SLqLidSIY-7cQ__",
-    "https://s3-alpha-sig.figma.com/img/2292/ce61/ca41be38791095be7d9260a72618df98?Expires=1717977600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=p0HkQDrRBhBBa2ZHVB33GTk17gMtI70YW3mkpMAXUK7QdsLh7ZxVafrdUlKVHkYfTWHnT-RKHvwg8XOui93sX76Uia3X-GoreZcj~~uIUCGxs1zvDwXOShYbXZk3VpNRB8wEyiCMfKXMb91XazcJ8J7cN608Rxz-5Xeq7UAUyWwBWa~dLRYe6dMvZbkD6nicZ0ShAMOlKcFmF~2bhaRhz9wGxdqP~Z6G2IdjPL~ZsAFLmK6PiD8p5b77CZw1xNZdnwiRDLtg4Arf-QoF-jwj2AC2m~Tma58qp1f7RsYNO5qnwQU~IGVpkL1mSuhajjhz5Viklp620SLqLidSIY-7cQ__",
+    "https://www.electrive.com/media/2024/01/xiaomi-su7-2023-11-min.jpg.webp",
+    "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2Fyc3xlbnwwfHwwfHx8MA%3D%3D",
+    "https://static1.topspeedimages.com/wordpress/wp-content/uploads/2023/05/bev-sport_front_16x9.jpg",
   ];
 
   const showDivs = (n) => {
@@ -20,22 +28,35 @@ const Slider = () => {
   return (
     <div className="slider">
       <div className="contain">
-        <div className="slider_textContent">
-          <img className="header_logo_img" src={logo} alt="#" />
-          <h3 className="slider_logoText">
-            Выкупим ваше авто на выгодных условиях
-          </h3>
-          <ul className="slider_ul">
-            <li className="slider_li">Оценим ваш автомобиль онлайн</li>
-            <li className="slider_li">
-              Осмотр автомобиля в удобном месте, в удобное время
-            </li>
-            <li className="slider_li">Подходят любые легковые авто</li>
-          </ul>
-          <button className="slider_more">Подборнее</button>
+        <div className="background">
+          <div className="slider_textContent">
+            <img
+              data-aos="zoom-in"
+              className="header_logo_img"
+              src={logo}
+              alt="#"
+            />
+            <h3 data-aos="fade-right" className="slider_logoText">
+              Выкупим ваше авто на выгодных условиях
+            </h3>
+            <ul data-aos="fade-right" className="slider_ul">
+              <li data-aos="fade-right" className="slider_li">
+                Оценим ваш автомобиль онлайн
+              </li>
+              <li data-aos="fade-right" className="slider_li">
+                Осмотр автомобиля в удобном месте, в удобное время
+              </li>
+              <li data-aos="fade-right" className="slider_li">
+                Подходят любые легковые авто
+              </li>
+            </ul>
+            <button data-aos="zoom-in" className="slider_more">
+              Подборнее
+            </button>
+          </div>
         </div>
       </div>
-      <div className="container">
+      <div data-aos="zoom-in" className="container">
         {slides.map((slide, index) => (
           <img
             key={index}

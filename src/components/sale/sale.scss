@@ -42,7 +42,8 @@
     border: 1px solid transparent !important;
 
     &:hover {
-      border-color: #007870 !important;
+      border-color: #fffff2 !important;
+      color: #00bef0 !important;
     }
   }
 
@@ -98,12 +99,12 @@
 }
 
 .ant-btn-primary {
-  background-color: #007870 !important;
-  border-color: #007870 !important;
+  background-color: #00bef0 !important;
+  border-color: #00bef0 !important;
 
   &:hover {
-    background-color: #007870 !important;
-    border-color: #007870 !important;
+    background-color: #fffff2 !important;
+    border-color: #00bef0 !important;
   }
 }
 
@@ -111,18 +112,18 @@
   border-color: transparent;
 
   &:hover {
-    color: #007870 !important;
-    border-color: #007870 !important;
+    color: #00bef0 !important;
+    border-color: #00bef0 !important;
   }
 }
 
 .ant-btn-link {
-  color: #007870;
+  color: #00bef0;
 
   &:hover {
-    color: #007870 !important;
-    border-color: #007870 !important;
-    background-color: #e6f7f7 !important;
+    color: #00bef0 !important;
+    border-color: #00bef0 !important;
+    background-color: #fffff2 !important;
   }
 }
 
@@ -133,16 +134,16 @@
 
   &:hover,
   &:focus {
-    border-color: #007870 !important;
+    border-color: #00bef0 !important;
   }
 }
 
 .ant-select-focused .ant-select-selector {
-  border-color: #007870 !important;
+  border-color: #00bef0 !important;
 }
 
 .ant-select-item-option:hover {
-  border-color: #007870 !important;
+  border-color: #00bef0 !important;
 }
 
 .ant-select-dropdown {
@@ -150,7 +151,7 @@
     border: 1px solid transparent !important;
 
     &:hover {
-      border-color: #007870 !important;
+      border-color: #00bef0 !important;
     }
   }
 }

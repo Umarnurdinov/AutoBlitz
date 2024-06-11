@@ -5,24 +5,35 @@ import axios from "axios";
 function Hero() {
   const [address, setAddress] = useState("");
   const [data, setData] = useState({
-    name: "",
-    number: "",
-    address: address,
+    username: "",
+    phone_number: "",
+    locate: `${address}`,
   });
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [geoError, setGeoError] = useState(""); // Состояние для хранения ошибки геолокации
+  const [confirmAddress, setConfirmAddress] = useState(false); // Состояние для подтверждения адреса
+  const [addressError, setAddressError] = useState(false); // Состояние для ошибки адреса
 
   function send() {
-    console.log("hello world");
     axios
-      .post("http://13.49.183.39:8000/fast-sell/", data)
+      .post("http://13.49.229.91:8000/fast-sell/", data)
       .then((res) => console.log(res))
-      .catch((res) => console.log(res));
+      .catch((error) => {
+        if (error.response) {
+          console.log("Server Error:", error.response.data);
+        } else if (error.request) {
+          console.log("Network Error:", error.request);
+        } else {
+          console.log("Error:", error.message);
+        }
+      });
   }
 
   function autoLocation() {
     if ("geolocation" in navigator) {
       setLoading(true);
+      setAddress(""); // Сброс адреса при новом запросе геолокации
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const latitude = position.coords.latitude;
@@ -31,15 +42,15 @@ function Hero() {
         },
         (error) => {
           setLoading(false);
-          if (error.code === 1) {
-            setShowModal(true);
-          } else {
-            alert("Error obtaining geolocation: " + error.message);
-          }
+          setGeoError(
+            "Геолокация отключена или доступ запрещен. Пожалуйста, включите её в настройках вашего браузера или устройства."
+          );
+          setShowModal(true); // Показываем модальное окно
         }
       );
     } else {
-      alert("Geolocation not available in this browser.");
+      setGeoError("Геолокация недоступна в этом браузере.");
+      setShowModal(true); // Показываем модальное окно
     }
   }
 
@@ -53,19 +64,40 @@ function Hero() {
         setAddress(data.display_name);
         setData((prevData) => ({
           ...prevData,
-          address: data.display_name,
+          locate: data.display_name,
         }));
+        setConfirmAddress(true); // Показываем кнопку подтверждения адреса
       } else {
-        alert("No address found");
+        setGeoError("Адрес не найден.");
+        setShowModal(true); // Показываем модальное окно
       }
     } catch (error) {
-      alert("Error fetching address: " + error.message);
+      setGeoError("Ошибка при получении адреса: " + error.message);
+      setShowModal(true); // Показываем модальное окно
     } finally {
       setLoading(false);
     }
   };
 
-  console.log(address);
+  const handleConfirmAddress = () => {
+    if (!address) {
+      setAddressError(true);
+      setGeoError(
+        "Адрес не найден. Пожалуйста, включите геолокацию или введите адрес вручную."
+      );
+      setShowModal(true);
+    } else {
+      setConfirmAddress(false);
+      setAddressError(false);
+    }
+  };
+
+  const handleAddressError = () => {
+    setGeoError(
+      "Адрес неправильный? Пожалуйста, включите геолокацию в настройках вашего браузера или устройства и повторите попытку."
+    );
+    setShowModal(true);
+  };
 
   return (
     <div className="hero">
@@ -93,7 +125,7 @@ function Hero() {
                 onChange={(e) =>
                   setData((prevData) => ({
                     ...prevData,
-                    name: e.target.value,
+                    username: e.target.value,
                   }))
                 }
               />
@@ -104,19 +136,42 @@ function Hero() {
                 onChange={(e) =>
                   setData((prevData) => ({
                     ...prevData,
-                    number: e.target.value,
+                    phone_number: e.target.value,
                   }))
                 }
               />
               <input
-                placeholder={loading ? "Загрузка..." : "Нажмите для заполнение"}
+                placeholder={loading ? "Загрузка..." : "Нажмите для заполнения"}
                 value={address}
                 type="text"
-                className="location"
+                className={`location ${addressError ? "error" : ""}`} // Добавляем класс ошибки
                 onClick={autoLocation}
                 readOnly
               />
-              <button type="button" className="send" onClick={send}>
+              {confirmAddress && (
+                <div>
+                  <button
+                    type="button"
+                    className="confirm-address"
+                    onClick={handleConfirmAddress}
+                  >
+                    Подтвердить адрес
+                  </button>
+                  <button
+                    type="button"
+                    className="address-error"
+                    onClick={handleAddressError}
+                  >
+                    Неправильно?
+                  </button>
+                </div>
+              )}
+              <button
+                type="button"
+                className="send"
+                onClick={send}
+                disabled={!address}
+              >
                 ОТПРАВИТЬ
               </button>
             </form>
@@ -132,9 +187,14 @@ function Hero() {
             <button className="close" onClick={() => setShowModal(false)}>
               &times;
             </button>
+            <p>{geoError}</p>
             <p>
-              Геолокация отключена или доступ запрещен. Пожалуйста, включите ее
-              в настройках вашего браузера или устройства.
+              Пожалуйста, включите геолокацию в настройках вашего браузера или
+              устройства и повторите попытку.
+            </p>
+            <p>
+              Если адрес введен неверно, проверьте и введите правильный адрес
+              вручную.
             </p>
           </div>
         </div>
