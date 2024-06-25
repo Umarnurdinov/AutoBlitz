@@ -212,7 +212,7 @@ a {
   width: 34px;
 }
 .footer-social-icon-svg {
-  position: absolute;
+  position: absolute !important;
   left: 36%;
   top: 35%;
   right: -30%;
@@ -243,7 +243,17 @@ a {
   color: #fff;
   text-decoration: none;
 }
+.footer-social-link {
+  width: 40px; /* Ширина по умолчанию для больших экранов */
+  height: 40px; /* Высота по умолчанию для больших экранов */
+}
 
+@media (max-width: 600px) {
+  .footer-social-link {
+    width: 30px; /* Измените ширину для мобильных устройств */
+    height: 30px; /* Измените высоту для мобильных устройств */
+  }
+}
 /* Media Query For different screens */
 @media (min-width: 320px) and (max-width: 479px) {
   /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
@@ -275,14 +285,38 @@ a {
     position: relative;
   }
 }
-@media (min-width: 801px) {
-  /* tablet, landscape iPad, lo-res laptops ands desktops */
+:root {
+  --footer-icon-size: 40px; /* Размер по умолчанию для больших экранов */
 }
-@media (min-width: 1025px) {
-  /* big landscape tablets, laptops, and desktops */
+
+.footer-social-link {
+  width: var(--footer-icon-size);
+  height: var(--footer-icon-size);
 }
-@media (min-width: 1281px) {
-  /* hi-res laptops and desktops */
+
+/* Адаптивность для различных размеров экрана */
+@media (max-width: 1200px) {
+  :root {
+    --footer-icon-size: 35px; /* Изменить размер для экранов до 1200px */
+  }
+}
+
+@media (max-width: 992px) {
+  :root {
+    --footer-icon-size: 30px; /* Изменить размер для экранов до 992px */
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --footer-icon-size: 25px; /* Изменить размер для экранов до 768px */
+  }
+}
+
+@media (max-width: 576px) {
+  :root {
+    --footer-icon-size: 20px; /* Изменить размер для экранов до 576px */
+  }
 }
 
 @media (min-width: 760px) {

@@ -10,7 +10,6 @@ import "./header.scss";
 function Header() {
   const [showModal, setShowModal] = useState(false);
 
-
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
   useEffect(() => {
@@ -23,8 +22,6 @@ function Header() {
       document.body.style.overflowY = "auto";
     };
   }, [showModal]);
-
- 
 
   return (
     <>
@@ -51,9 +48,9 @@ function Header() {
                 </Link>
               </div>
               <div className="header_nav_signin">
-                <Link className="signins" to={"/login"}>
+                <Link className="signins" to={"/authorization"}>
                   <FaRegUser className="signin" />
-                <p className="header_nav_signin_text">Войти</p>
+                  <p className="header_nav_signin_text">Войти</p>
                 </Link>
               </div>
             </div>

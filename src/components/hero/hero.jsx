@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./hero.scss";
 import axios from "axios";
+import "./hero.scss";
 
 function Hero() {
   const [address, setAddress] = useState("");

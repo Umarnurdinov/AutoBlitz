@@ -176,6 +176,7 @@
   }
 
   @media (max-width: 1024px) {
+    background-attachment: scroll;
     &_textContent {
       display: flex;
       flex-direction: column;

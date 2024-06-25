@@ -3,41 +3,11 @@ import { Link } from "react-router-dom";
 import "./filter.scss";
 import axios from "axios";
 import Card from "../card/card";
-import bmw from "../../assets/bmwx5.webp";
-import bmw2 from "../../assets/bmwx52.jpeg";
-import bmw3 from "../../assets/bmwx53.webp";
-import mercedes from "../../assets/mercedes.jpeg";
-import mercedes2 from "../../assets/mercedes2.jpeg";
-import mercedes3 from "../../assets/mercedes3.jpeg";
-import lexusrx from "../../assets/lexusrx.jpeg";
-import lexusrx2 from "../../assets/lexusrx2.jpeg";
-import lexusrx3 from "../../assets/lexusrx3.jpeg";
-import tesla from "../../assets/tesla3.webp";
-import tesla2 from "../../assets/tesla3-2.avif";
-import tesla3 from "../../assets/tesla3-3.jpeg";
-import jetour from "../../assets/jetour.jpeg";
-import jetour2 from "../../assets/jetour2.jpeg";
-import jetour3 from "../../assets/jetour3.jpeg";
-import bmwm from "../../assets/bmwm.png";
-import bmwm2 from "../../assets/bmwm-2.avif";
-import bmwm3 from "../../assets/bmwm-3.jpeg";
-import toyota from "../../assets/toyotaHigh.jpeg";
-import toyota2 from "../../assets/toyotaHigh2.avif";
-import toyota3 from "../../assets/toyotaHigh3.jpeg";
 
 function Filter() {
   const [title, setTitle] = useState("Купить автомобиль");
   const [activeTab, setActiveTab] = useState("1");
   const [filData, setFilData] = useState([]);
-  const imgArray = [
-    [bmw3, bmw2, bmw],
-    [mercedes3, mercedes2, mercedes],
-    [lexusrx3, lexusrx2, lexusrx],
-    [tesla, tesla2, tesla3],
-    [jetour, jetour2, jetour3],
-    [bmwm2, bmwm, bmwm3],
-    [toyota2, toyota, toyota3],
-  ];
   // State for filters
   const initialFilters = {
     marka: "",
