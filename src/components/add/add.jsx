@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { FiPlusCircle } from "react-icons/fi";
 import logoAdd from "../../assets/logoAdd.webp";
@@ -8,24 +8,41 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 
 function Add() {
+  const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+  const [showRegistrationPrompt, setShowRegistrationPrompt] = useState(false);
+
   useEffect(() => {
     Aos.init({
       duration: 850,
       once: true,
     });
   }, []);
-  const [showModal, setShowModal] = useState(false);
 
   const handleSellClick = () => {
-    setShowModal(true);
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setShowRegistrationPrompt(true);
+    } else {
+      setShowModal(true);
+    }
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
   };
 
+  const handleRegisterClick = () => {
+    setShowRegistrationPrompt(false);
+    navigate("/authorization");
+  };
+
+  const handleCloseRegistrationPrompt = () => {
+    setShowRegistrationPrompt(false);
+  };
+
   useEffect(() => {
-    if (showModal) {
+    if (showModal || showRegistrationPrompt) {
       document.body.style.overflowY = "hidden";
     } else {
       document.body.style.overflowY = "auto";
@@ -33,7 +50,7 @@ function Add() {
     return () => {
       document.body.style.overflowY = "auto";
     };
-  }, [showModal]);
+  }, [showModal, showRegistrationPrompt]);
 
   return (
     <>
@@ -85,6 +102,29 @@ function Add() {
                   </button>
                 </Link>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {showRegistrationPrompt && (
+        <div className="modal">
+          <div data-aos="zoom-in" className="modal-content">
+            <span className="close" onClick={handleCloseRegistrationPrompt}>
+              &times;
+            </span>
+            <h2 data-aos="zoom-in">Пожалуйста, зарегистрируйтесь</h2>
+            <div className="modal-body">
+              <p>
+                Для продолжения, пожалуйста, зарегистрируйтесь или войдите в
+                систему.
+              </p>
+              <button
+                data-aos="zoom-in-up"
+                onClick={handleRegisterClick}
+                className="btn-create-final"
+              >
+                Зарегистрироваться
+              </button>
             </div>
           </div>
         </div>

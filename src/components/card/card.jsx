@@ -67,6 +67,7 @@ function Card({ data }) {
     }
     setFavorite(!favorite);
   }
+
   return (
     <div
       onClick={() => cardClick(data.id)}
@@ -77,9 +78,10 @@ function Card({ data }) {
       <div data-aos="zoom-in" className="card-image-container">
         {data && data.images && data.images.length > 0 && (
           <img
-            src={data && data.images[currentImageIndex]}
+            src={data.images[currentImageIndex].image_url}
             alt="#"
             className={`card-image ${isTransitioning ? "transitioning" : ""}`}
+            loading="lazy" // Add this line for lazy loading
           />
         )}
         <span

@@ -1,59 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./detail.scss";
-import bmw1 from "../../assets/bmwx5.webp";
-import bmw2 from "../../assets/bmwx52.jpeg";
-import bmw3 from "../../assets/bmwx53.webp";
-import mazda1 from "../../assets/mazda.webp";
-import mazda2 from "../../assets/mazda3.webp";
-import mazda3 from "../../assets/mazda2.jpeg";
-import camry1 from "../../assets/camry.webp";
-import camry2 from "../../assets/camry2.webp";
-import camry3 from "../../assets/camry3.webp";
-import mercedes from "../../assets/mercedes.jpeg";
-import mercedes2 from "../../assets/mercedes2.jpeg";
-import mercedes3 from "../../assets/mercedes3.jpeg";
 import userMale from "../../assets/user.png";
 import userFemale from "../../assets/userFemale.png";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
-
-// const sampleData = [
-//   {
-//     id: 1,
-//     marka: "LADA",
-//     car_model: "Largus",
-//     price: 1639000,
-//     year_of_manufacture: 2021,
-//     mileage: 43517,
-//     body: "Универсал",
-//     body_color: "Белый",
-//     engine: "1.6 л, Бензин",
-//     power: "106 л.с.",
-//     checkpoint: "Механическая ",
-//     drive_unit: "Передний привод",
-//     owners: 1,
-//     steering_wheel: "Левый",
-//     phone_number: "+996 702 138 887",
-//     name: "Аделина",
-//     gender: "",
-//     images: [
-//       camry1,
-//       camry2,
-//       camry3,
-//       bmw1,
-//       bmw2,
-//       bmw3,
-//       mazda1,
-//       mazda2,
-//       mazda3,
-//       mercedes,
-//       mercedes2,
-//       mercedes3,
-//     ],
-//   },
-// ];
 
 function Detail() {
   const { id } = useParams();
@@ -71,10 +23,11 @@ function Detail() {
     const car = datas.find((el) => el.id == id);
     if (car) {
       setData(car);
-      setSelectedImage(car.images[0]);
+      setSelectedImage(car.images[0]?.image_url || null); // Set default image if exists
       setCurrentIndex(0);
     }
-  }, [id]);
+  }, [id, datas]);
+
   const guessGender = (name) => {
     const femaleNames = ["а", "я", "и", "a"];
     const lastChar = name.slice(-1).toLowerCase();
@@ -82,7 +35,7 @@ function Detail() {
   };
 
   const handleThumbnailClick = (img, index) => {
-    setSelectedImage(img);
+    setSelectedImage(img.image_url);
     setCurrentIndex(index);
   };
 
@@ -97,7 +50,7 @@ function Detail() {
   const showNextImage = (e) => {
     e.stopPropagation();
     const nextIndex = (currentIndex + 1) % data.images.length;
-    setSelectedImage(data.images[nextIndex]);
+    setSelectedImage(data.images[nextIndex].image_url);
     setCurrentIndex(nextIndex);
   };
 
@@ -105,7 +58,7 @@ function Detail() {
     e.stopPropagation();
     const prevIndex =
       (currentIndex - 1 + data.images.length) % data.images.length;
-    setSelectedImage(data.images[prevIndex]);
+    setSelectedImage(data.images[prevIndex].image_url);
     setCurrentIndex(prevIndex);
   };
 
@@ -134,6 +87,7 @@ function Detail() {
   const maskPhoneNumber = (number) => {
     return number.replace(/\d(?=\d{0,2}$)/g, "x");
   };
+
   if (!data) {
     return (
       <div className="loaderToCenter">
@@ -143,6 +97,7 @@ function Detail() {
       </div>
     );
   }
+
   function favorite() {
     setLike(!like);
   }
@@ -188,17 +143,20 @@ function Detail() {
                 {data.mileage.toLocaleString()} км
               </li>
               <li>
-                <strong className="detailText">Кузов:</strong> {data.body_name}
+                <strong className="detailText">Кузов:</strong>
+                {data.body_name}
               </li>
               <li>
                 <strong className="detailText">Цвет кузова:</strong>
                 {data.body_color_name}
               </li>
               <li>
-                <strong className="detailText">Двигатель:</strong> {data.engine}
+                <strong className="detailText">Двигатель:</strong>
+                {data.engine}
               </li>
               <li>
-                <strong className="detailText">Мощность:</strong> {data.power}
+                <strong className="detailText">Мощность:</strong>
+                {data.power}
               </li>
               <li>
                 <strong className="detailText">КПП:</strong>
@@ -209,7 +167,8 @@ function Detail() {
                 {data.drive_unit_name}
               </li>
               <li>
-                <strong className="detailText">Владельцы:</strong> {data.owners}
+                <strong className="detailText">Владельцы:</strong>
+                {data.owners}
               </li>
               <li>
                 <strong className="detailText">Руль:</strong>
@@ -287,10 +246,10 @@ function Detail() {
                 .map((img, index) => (
                   <img
                     key={index}
-                    src={img}
+                    src={img.image_url}
                     alt={`Thumbnail ${index}`}
                     onClick={() => handleThumbnailClick(img, index)}
-                    className={img === selectedImage ? "active" : ""}
+                    className={img.image_url === selectedImage ? "active" : ""}
                   />
                 ))}
               {!showAll && (

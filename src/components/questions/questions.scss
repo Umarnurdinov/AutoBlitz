@@ -1,28 +1,29 @@
-.qq {
-  background: url("https://www.desktopbackground.org/download/o/2014/09/15/825484_old-bmw-car-cool-backgrounds-wallpapers-1752-hd-wallpapers-site_1920x1200_h.jpg")
-    no-repeat center center;
+.questions-wrapper {
+  position: relative;
   height: 100%;
-  background-size: cover;
-  color: #000;
-  background-attachment: fixed;
+  overflow: hidden;
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
 .qc {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-start;
-  margin-bottom: 50px;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-    justify-content: space-evenly;
-  }
+  justify-content: center;
 }
 
 .questions {
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.4);
   padding: 20px;
 
   @media (min-width: 768px) {
@@ -44,7 +45,7 @@
 
   &__title {
     padding-top: 50px;
-    color: white;
+    color: rgba(255, 255, 255, 0.9);
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
       "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
     text-align: center;
@@ -58,26 +59,27 @@
     display: flex;
     justify-content: space-between;
     gap: 10px;
-    background: rgba(255, 255, 255, 1);
+    background: rgba(255, 255, 255, 0.6);
     margin-bottom: 10px;
     padding: 15px;
     border-radius: 5px;
     cursor: pointer;
-    border: 1px solid #ddd;
+    border: 1px solid rgba(221, 221, 221, 0.6);
     transition: background 0.3s, transform 0.3s;
     position: relative;
 
     &:hover {
-      background: #f9f9f9;
+      background: rgba(249, 249, 249, 0.6);
       transform: scale(1.01);
     }
 
     &.active {
-      background: #f1f1f1;
+      background: rgba(241, 241, 241, 0.6);
 
       .questions__answer {
         max-height: 500px; // Adjust accordingly
-        transition: max-height 0.3s ease-in-out;
+        opacity: 1;
+        transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
       }
     }
 
@@ -89,6 +91,7 @@
       justify-content: space-between;
       align-items: center;
       font-size: 16px;
+      color: rgba(0, 0, 0, 0.8);
 
       @media (min-width: 768px) {
         font-size: 18px;
@@ -97,7 +100,7 @@
       &:after {
         content: "+";
         font-size: 20px;
-        color: #000;
+        color: rgba(0, 0, 0, 0.8);
         transition: transform 0.3s;
 
         @media (min-width: 768px) {
@@ -115,10 +118,11 @@
     &__answer {
       font-size: 14px;
       margin: 10px 0 0;
-      animation: fadeIn 0.3s ease-in-out;
       max-height: 0;
+      opacity: 0;
       overflow: hidden;
-      transition: max-height 0.3s ease-in-out;
+      transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+      color: rgba(0, 0, 0, 0.8);
 
       @media (min-width: 768px) {
         font-size: 16px;
@@ -150,7 +154,7 @@
   &__cta {
     padding: 20px;
     border-radius: 5px;
-    color: white;
+    color: rgba(255, 255, 255, 0.9);
     text-align: center;
 
     @media (min-width: 768px) {
@@ -176,9 +180,9 @@
     }
 
     &-button {
-      background-color: #027b9a;
+      background-color: rgba(2, 123, 154, 0.8);
       border: none;
-      color: white;
+      color: rgba(255, 255, 255, 0.9);
       padding: 10px 20px;
       text-align: center;
       text-decoration: none;
@@ -195,7 +199,7 @@
       }
 
       &:hover {
-        background-color: #fffff2;
+        background-color: rgba(255, 255, 242, 0.9);
         color: #027b9a;
         transform: scale(1.05);
       }

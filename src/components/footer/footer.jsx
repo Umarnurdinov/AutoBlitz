@@ -113,7 +113,7 @@ function Footer() {
               <p className="footer-call-to-action-link-wrapper">
                 <a
                   className="footer-call-to-action-link"
-                  href="tel:0124-64XXXX"
+                  href="tel:+996709713875"
                   target="_self"
                 >
                   +996 709 71-38-75

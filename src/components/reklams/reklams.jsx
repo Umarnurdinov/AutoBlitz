@@ -44,7 +44,9 @@ function Reklams() {
     <>
       <div className="container">
         <div className="reklams-container">
-          <h2 className="advantages-header">Наши преимущества</h2>
+          <h2 data-aos="zoom-in" className="advantages-header">
+            Наши преимущества
+          </h2>
           <div className="reklams">
             <div className="reklam-card">
               <img data-aos="fade-right" src={reklam1} alt="Operatively" />
